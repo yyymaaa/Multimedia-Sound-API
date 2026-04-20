@@ -19,7 +19,7 @@ function formatTime(seconds) {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-// Ensure duration updates when metadata or data is available
+
 const updateDuration = () => {
     if (audio.duration) {
         durationTxt.innerText = formatTime(audio.duration);
@@ -83,7 +83,7 @@ loopBtn.addEventListener('click', () => {
 window.addEventListener('keydown', (e) => {
     switch (e.code) {
         case 'Space':
-            e.preventDefault(); // Prevents page from jumping down
+            e.preventDefault(); 
             playBtn.click();
             break;
         case 'ArrowRight':
