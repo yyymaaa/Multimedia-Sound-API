@@ -57,9 +57,11 @@ progressBar.addEventListener('input', () => {
     const seekTime = (progressBar.value / 100) * audio.duration;
     audio.currentTime = seekTime;
 });
-
+ 
 // Features
-skipBackBtn.addEventListener('click', () => { audio.currentTime -= 10; });
+skipBackBtn.addEventListener('click', () => { 
+    audio.currentTime = 0; 
+});
 skipForwardBtn.addEventListener('click', () => { audio.currentTime += 10; });
 
 volumeSlider.addEventListener('input', () => {
@@ -75,4 +77,33 @@ muteBtn.addEventListener('click', () => {
 loopBtn.addEventListener('click', () => {
     audio.loop = !audio.loop;
     loopBtn.classList.toggle('active', audio.loop);
+});
+
+// --- Keyboard Controls ---
+window.addEventListener('keydown', (e) => {
+    switch (e.code) {
+        case 'Space':
+            e.preventDefault(); // Prevents page from jumping down
+            playBtn.click();
+            break;
+        case 'ArrowRight':
+            audio.currentTime += 5;
+            break;
+        case 'ArrowLeft':
+            audio.currentTime -= 5;
+            break;
+        case 'ArrowUp':
+            e.preventDefault();
+            audio.volume = Math.min(1, audio.volume + 0.1);
+            volumeSlider.value = audio.volume;
+            break;
+        case 'ArrowDown':
+            e.preventDefault();
+            audio.volume = Math.max(0, audio.volume - 0.1);
+            volumeSlider.value = audio.volume;
+            break;
+        case 'KeyM':
+            muteBtn.click();
+            break;
+    }
 });
